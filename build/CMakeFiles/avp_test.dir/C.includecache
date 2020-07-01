@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/edz/Developer/diameter_binpacking/src/avp.h
+stdint.h
+-
+stdlib.h
+-
+
+/home/edz/Developer/diameter_binpacking/src/msg.c
+stdlib.h
+-
+string.h
+-
+avp.h
+/home/edz/Developer/diameter_binpacking/src/avp.h
+msg.h
+/home/edz/Developer/diameter_binpacking/src/msg.h
+
+/home/edz/Developer/diameter_binpacking/src/msg.h
+stdint.h
+-
+avp.h
+/home/edz/Developer/diameter_binpacking/src/avp.h
+
+/home/edz/Developer/diameter_binpacking/src/test.c
+stdio.h
+-
+avp.h
+/home/edz/Developer/diameter_binpacking/src/avp.h
+msg.h
+/home/edz/Developer/diameter_binpacking/src/msg.h
+

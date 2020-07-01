@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/avp_test.dir/src/test.c.o CMakeFiles/avp_test.dir/src/avp.c.o CMakeFiles/avp_test.dir/src/msg.c.o  -o avp_test 
