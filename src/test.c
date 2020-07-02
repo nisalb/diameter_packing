@@ -59,11 +59,11 @@ main(void)
     hexdump(bin, len);
     free(bin);
 
-    avp_delete(sub_id);
+    // avp_delete(sub_id);
 
     printf("Test #msgs\n");
 
-    len = asciitobin("IT_SMS_GW_5.mobitel.lk", &bin);
+    len = asciitobin("IT_SMS_GW_5.mobitel;lk", &bin);
     struct dm_avp *origin_host = avp_new(264, AVP_MANDATORY, bin, len);
 
     len = asciitobin("172.19.147.38", &bin);
@@ -87,7 +87,8 @@ main(void)
     len = hextobin("000003ea", &bin);
     struct dm_avp *acct_app_id = avp_new(259, AVP_MANDATORY, bin, len);
 
-    struct dm_msg *msg = msg_new(257, MSG_REQ, 0, 0xce000001, 0xd3acf861);
+    struct dm_msg *msg = msg_new(257, MSG_REQ, 0x3eb, 0xce000001, 0xd3acf861);
+    // msg_prepend_avp(msg, sub_id);
     msg_prepend_avp(msg, acct_app_id);
     msg_prepend_avp(msg, auth_app_id);
     msg_prepend_avp(msg, origin_state_id);
@@ -102,6 +103,8 @@ main(void)
     len = msg_pack(msg, &bin);
     hexdump(bin, len);
     free(bin);
+
+    msg_delete(msg);
 
     return 0;
 }

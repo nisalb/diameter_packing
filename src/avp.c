@@ -220,13 +220,19 @@ avp_pack(struct dm_avp *avp, uint8_t **binp)
     set_1byte(bin, AVP_FLAG_OFFSET, avp->flags);
     set_3bytes(bin, AVP_LNGT_OFFSET, avp->length);
 
-    if (avp->children) {
-        // TODO: add adjustments for vendor id
-        uint8_t *      datap = bin + AVP_DATA_OFFSET;
-        struct dm_avp *pchld = avp->children;
+    uint8_t *datap;
+    if (avp->vnid != NO_VENDOR_ID) {
+        set_4bytes(bin, AVP_VNID_OFFSET, avp->vnid);
+        datap = bin + AVP_VDTA_OFFSET;
+    } else {
+        datap = bin + AVP_DATA_OFFSET;
+    }
 
-        uint8_t *cdata;
-        size_t   cdlen = 0;
+    if (avp->children) {
+        struct dm_avp *pchld = avp->children;
+        uint8_t *      cdata;
+        size_t         cdlen = 0;
+
         while (pchld) {
             cdlen = avp_pack(pchld, &cdata);
             memcpy(datap, cdata, cdlen);
@@ -236,9 +242,7 @@ avp_pack(struct dm_avp *avp, uint8_t **binp)
         }
     } else if (avp->data) {
         // primitive AVP
-        // TODO: handle vendor id
-        // TODO: add adjustments for vendor id
-        memcpy(bin + AVP_DATA_OFFSET, avp->data, avp->datasz);
+        memcpy(datap, avp->data, avp->datasz);
     }
 
     *binp = bin;

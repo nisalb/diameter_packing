@@ -12,16 +12,6 @@ stdint.h
 stdlib.h
 -
 
-/home/edz/Developer/diameter_binpacking/src/msg.c
-stdlib.h
--
-string.h
--
-avp.h
-/home/edz/Developer/diameter_binpacking/src/avp.h
-msg.h
-/home/edz/Developer/diameter_binpacking/src/msg.h
-
 /home/edz/Developer/diameter_binpacking/src/msg.h
 stdint.h
 -
